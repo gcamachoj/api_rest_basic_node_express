@@ -1,0 +1,15 @@
+{
+  "name": "rest_api_gcj",
+  "version": "1.0.0",
+  "description": "Primera Api Rest con NPM y Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "GUILLERMO CAMACHO JARAMILLO",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}
