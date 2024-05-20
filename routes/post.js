@@ -1,8 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const Post = require('../models/Post');
+
 router.post('/', async (req,res) =>{
     // console.log(req.body); se utiliza para la respuesta del post en consola
 
     const post = new Post({
-        title: req.bdoy.title,
+        title: req.body.title,
         description: req.body.description
 
     });
@@ -20,19 +24,19 @@ router.post('/', async (req,res) =>{
      * 
      */
 
-    router.get('/postId', async (req, res) => {
+    router.get('/:postId', async (req, res) => {
         try {
             const post = await Post.findById(req.params.postId); // Encuentra por id
             res.json(post);
         }   catch (error) {
-                res.json({messaje:error})            
+                res.json({message:error})            
         }    
     });
 
-    router.delete('/postId', async (req, res) => {
+    router.delete('/:postId', async (req, res) => {
         try {
-            const removePost = await Post.remove({_id: req.params.postId}); // borrra
-            res.json(removedPost);
+            const removePost = await Post.deleteOne({_id: req.params.postId}); // borrra
+            res.json(removePost);
         } catch (error) {
             res.json({message: error});            
         }
@@ -42,7 +46,7 @@ router.post('/', async (req,res) =>{
     * Actualizar el post
     */
 
-    router.patch('/postId', async (req,res) =>{
+    router.patch('/:postId', async (req,res) =>{
         // patch para actualizar
         
         try { 
@@ -50,7 +54,7 @@ router.post('/', async (req,res) =>{
                 // Actualizar de uno en uno
                     {_id: req.params.postId},
                     {$set: {title: req.body.title}});
-                rest.json(updatePost);
+                res.json(updatePost);
 
                 } catch(error) {
                     res.json({messaje: error});
